@@ -55,25 +55,51 @@ capitals = {
     'Wyoming': 'Cheyenne'
 }
 
-#  Shuffle order of States
-states = list(capitals.keys())
-random.shuffle(states)
 
-n = 1
-#  Create test Questions
-for state in states:
-    capital = list(capitals.values())
-    q = f"\n\nQuestion number {n}: "
-    n += 1
-    print(f"{q}\nWhat is the Capital of {state}?")
+def quiz(cap):
+    for q_num in range(3):
+        q_file = open(f'capital_quiz_{q_num + 1}.txt', "w")
+        answer_key = open(f'capital_quiz_answers{q_num + 1}.txt', "w")
 
-    b = capitals[state]
-    print(b)
-    lis = b.split(",")
+        #  write the header for the quiz
+        answer_key.write(f"Form {q_num + 1}")
+        q_file.write('Name:\n\nDate:\n\nPeriod:\n\n' + (' ' * 20) + f'State Capital Quiz (Form {q_num + 1})')
+        q_file.write('\n\n')
 
-    a = random.sample(capital, 3) + lis
+        #  Shuffle order of States
+        states = list(cap.keys())
+        random.shuffle(states)
 
-    s = 1
-    for i in a:
-        print(f"{s}) {i}")
-        s += 1
+        n = 1
+        #  Create test Questions
+        for state in states:
+            capital = list(capitals.values())
+            q = f"\n\nQuestion number {n}: "
+            n += 1
+            q_file.write(f"{q}\nWhat is the Capital of {state}?\n")
+
+            #  create string val for the right answer
+            ans = capitals[state]
+            #  turns string into a single list while removing ","
+            answer = ans.split(",")
+
+            #  write answers to answer_key
+            answer_key.write(f"{q}\nWhat is the Capital of {state}?\n{ans}")
+
+            #  delete val from capital list
+            del capital[capital.index(ans)]
+            #  combine string right answer to a random list of 3 sample picks from capital
+            questions = random.sample(capital, 3) + answer
+            #  shuffle 4 vals in list
+            random.shuffle(questions)
+
+            s = 1
+            for question in questions:
+                q_file.write(f"{s}) {question}\n")
+                s += 1
+
+        q_file.close()
+        answer_key.close()
+
+
+quiz(capitals)
