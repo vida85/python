@@ -67,31 +67,13 @@ for state in states:
     n += 1
     print(f"{q}\nWhat is the Capital of {state}?")
 
-
-    def match(state):
-        if state in capitals.keys():
-            return capitals[state]
-
-
-    a = random.choice(capital)
     b = capitals[state]
-    c = random.choice(capital)
-    d = random.choice(capital)
+    print(b)
+    lis = b.split(",")
 
-    questions = [a, b, c, d]
-    random.shuffle(questions)
+    a = random.sample(capital, 3) + lis
 
-
-    def shuffle():
-        questions = [a, b, c, d]
-        random.shuffle(questions)
-        return questions
-
-
-    for c, q in enumerate(shuffle()):
-        if a != b and a != c and a != d and b != c and b != d and c != d:
-            print(f"{c + 1}) {q}")
-        else:
-            print(f"{c + 1}) {random.shuffle(questions)}")
-            continue
-
+    s = 1
+    for i in a:
+        print(f"{s}) {i}")
+        s += 1
