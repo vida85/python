@@ -1,9 +1,9 @@
 
 def main():
-    x = input("Enter number: ")
-    func = input(f"{x}\nPick Operation\n'add, sub, mul, div': ")
+    while True:
+        x = input("Enter number: ")
+        func = input(f"{x}\nPick Operation\n'add, sub, mul, div': ")
     
-    while True:      
         if func == "add":
             y = input(f"{x} + ")
             call(func, x, y)
