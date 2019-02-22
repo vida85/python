@@ -11,8 +11,10 @@ def main():
             y = input(f"{x} - ")
             print(f"{x - y})
         elif func == "mul":
+            y = input(f"{x} * ")
             print(f"{x * y})
         elif func == "div":
+            y = input(f"{x} / ")
             print(f"{x / y})
         else:
             print("sorry invalid input")
