@@ -1,21 +1,28 @@
-
 def main():
     while True:
         x = input("Enter number: ")
         func = input(f"{x}\nPick Operation\n'add, sub, mul, div': ")
-    
+
         if func == "add":
             y = input(f"{x} + ")
-            print(f"{x + y})
+            x, y = int(x), int(y)
+            print(f"{x + y}")
+            
         elif func == "sub":
             y = input(f"{x} - ")
-            print(f"{x - y})
+            x, y = int(x), int(y)
+            print(f"{x - y}")
+            
         elif func == "mul":
             y = input(f"{x} * ")
-            print(f"{x * y})
+            x, y = int(x), int(y)
+            print(f"{x * y}")
+            
         elif func == "div":
             y = input(f"{x} / ")
-            print(f"{x / y})
+            x, y = int(x), int(y)
+            print(f"{x / y}")
+            
         else:
             print("sorry invalid input")
             continue      
