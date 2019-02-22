@@ -11,14 +11,11 @@ def main():
         if func == "+":
             print(f"{x + y}")      
         elif func == "-":
-            print(f"{x - y}")
-            
+            print(f"{x - y}")        
         elif func == "*":
-            print(f"{x * y}")
-            
+            print(f"{x * y}")     
         elif func == "/":
             print(f"{x / y}")
-            
         else:
             print("sorry invalid operation, '+, -, *, /'")
             continue      
