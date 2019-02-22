@@ -6,46 +6,17 @@ def main():
     
         if func == "add":
             y = input(f"{x} + ")
-            call(func, x, y)
+            print(f"{x + y})
         elif func == "sub":
             y = input(f"{x} - ")
-            call(func, x, y)
+            print(f"{x - y})
         elif func == "mul":
-            y = input(f"{x} * ")
-            call(func, x, y)
+            print(f"{x * y})
         elif func == "div":
-            y = input(f"{x} / ")
-            call(func, x, y)
+            print(f"{x / y})
         else:
             print("sorry invalid input")
-            continue
+            continue      
 
-def call(func, x, y):
-    # convert str to int.
-    x, y = int(x), int(y)
-    
-    # operations
-    add = (lambda n1, n2: n1 + n2)(x, y)
-    sub = (lambda n1, n2: n1 - n2)(x, y)
-    mul = (lambda n1, n2: n1 * n2)(x, y)
-    div = (lambda n1, n2: n1 / n2)(x, y)
-    
-    while True:     
-        if func == "add":
-            print(add)
-            main()
-        elif func == "sub":
-            print(sub)
-            main()
-        elif func == "mul":
-            print(mul)
-            main()
-        elif func == "div":
-            print(div)
-            main()
-        else:
-            print("sorry invalid input")
-            main()
-        
 
 main()
