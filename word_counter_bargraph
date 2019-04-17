@@ -6,21 +6,22 @@ import collections
 
 
 # upload a file from OS
-os.chdir('C:\\Users\\vida\\Desktop')
+os.chdir('C:\\Users\\vidas\\Onedrive\\Desktop')
 filetxt = input('Enter text file to count: ')
 with open(filetxt, 'r') as file:
     ff = file.read()
     filetext = ff.lower()
 
 # create a list from every word in filetxt
+filetext.strip()
 lst = filetext.split()
-# [print(words) for words in lst]
+#[print(words) for words in lst]
 
 # create an empty set
-ex = set()
+ex = set(lst)
 
-# populate the empty set, remove duplicates from lst
-[ex.add(words) for words in lst]
+remove_words = ['to', 'my', 'dear', 'it', 'i', 'this', 'of', 'is', 'a', 'we', 'the', 'what', 'brethren,', 'for']
+[lst.remove(word) for word in remove_words if word in lst]
 
 # counts multiple same words appearance in filetxt and prints results
 count = collections.Counter(lst)
@@ -37,7 +38,6 @@ for v in nums:
     else:
         value = value + [v]
         c += 1
-print(value)
 
 key = []
 c = 1
@@ -47,7 +47,8 @@ for k in keys:
     else:
         key = key + [k]
         c += 1
-print(key)
+print([f"{k}: {v}" for k, v in zip(key, value)])
+
 
 # prints each word and it's word count
 # [print(f'{words}:{nums}') for words, nums in count.items()]
