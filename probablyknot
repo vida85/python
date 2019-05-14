@@ -1,0 +1,73 @@
+#! python
+#!/usr/bin/python
+# ProbablyKnot Program by Davi Silveira
+
+import sys
+import requests
+from bs4 import BeautifulSoup as bs
+import os
+from time import strftime
+
+# CWD will be the desktop
+# os.chdir(r"C:\Users\vida\Desktop")
+os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+
+# get time and date
+t_file = strftime("%a%b%Y_%H_%M")
+t = strftime("%a, %d %b %Y, %H:%M")
+
+
+def user():
+        """
+        takes input from user and 
+        returns an analysed rephrased 
+        sentence
+        """
+        while True:
+                sentence = input("Enter a problem statement: ")
+                word = input("Select a word to analyse, from the above statement: ")
+                sentence, word = sentence.lower(), word.lower()
+                if word not in sentence:
+                        continue
+                else:
+                        break
+        synonyms = get_synonyms(word)
+        return display_report(sentence, word, synonyms)
+
+
+def get_synonyms(word):
+        """
+        requests pull from www.thesaurus.com
+        pulls all span elements from the page.
+        **I have not been able to narrow my selection
+        to just a small group of words...
+        """
+        url = f"https://www.thesaurus.com/browse/{word}"
+        r = requests.get(url)
+        soup = bs(r.content, 'lxml')
+        result = soup.findAll("span", {"class": "css-133coio etbu2a32"})
+        return result
+
+
+def display_report(sentence, word, synonyms):
+        """
+        creates a file and writes the content from 
+        website thesaurus for user. Saves everything to 
+        Desktop
+        """
+        txt_file = f"Probably_Knot_{t_file}.txt"
+        with open(txt_file, "w") as f:
+            dic = {}
+            f.write(f"Probably Knot  |  {t}\n" \
+                    f"Problem Statement: {sentence}\n" \
+                    f"Analysed Word: {word}\n\n")
+            for num, w in enumerate(synonyms, 1):
+                    f.write(sentence.replace(word, w.text))
+                    f.write("\n")
+                    dic.setdefault(num)
+                    dic[num] = sentence.replace(word, w.text)
+            [print(f"{d}: {w}") for d, w in dic.items()]
+            f.close()
+
+
+user()
