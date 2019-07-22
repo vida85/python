@@ -1,0 +1,154 @@
+#:import rgba kivy.utils.get_color_from_hex
+
+<MenuButton@ButtonBehavior+Label>:
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.5, 0.7, 1
+        Ellipse:
+            pos: self.pos
+            size: self.height, self.height
+        Ellipse:
+            pos: self.x + self.width - self.height, self.y
+            size: self.height, self.height
+        Rectangle:
+            pos: self.x + self.height / 2, self.y
+            size: self.width - self.height, self.height
+<Button>:
+    background_color: 0,0,0,0
+##############################
+######## TRACKER LOOK ########
+
+##############################
+######## TRACKER LOOK ########
+<ScreenGenerator>:
+    Menu:
+        name: 'menu'
+    Trackers:
+        name: 'track'
+
+<Menu>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 9
+        Image:
+            source: 'book.png'
+            allow_strech: True
+        Label:
+            id: menu_date
+            text: ''
+            markup: True
+        MenuButton:
+            text: 'Enter Trackers'
+            height: 60
+            size_hint_y: None
+            background_image: ''
+            background_color: rgba('#637075')
+            on_release: app.root.current = 'track'
+
+<Trackers>:
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            height: 45
+            size_hint_y: None
+            background_image: ''
+            background_color: rgba('#0B3242')
+            ActionView:
+                ActionPrevious:
+                    title: '[b]TRACKERS[/b]'
+                    font_size: 21
+                    color: rgba('#AFB7BA')
+                    markup: True
+                    on_release: app.root.current = 'menu'
+                ActionButton:
+                    text: 'SEND'
+                    color: rgba('#AFB7BA')
+                    on_release: root.send()
+        ScrollView:
+            BoxLayout:
+                id: track
+                orientation: 'vertical'
+                font_size: 15
+                size_hint_y: None
+                height: self.minimum_height
+        BoxLayout:
+            size_hint_y: None
+            height: 45
+            TextInput:
+                id: text_input
+                hint_text: 'Add Trackers'
+                multiline: False
+            Button:
+                text: '+'
+                size_hint_x: None
+                width: 60
+                on_release: root.addWidget()
+                background_color: rgba('#1D7332')
+
+<Tracker>:
+    count_add: count_add
+    size_hint_y: None
+    height: 45
+
+    Button:
+        text: '[b]X[/b]'
+        markup: True
+        size_hint_x: None
+        on_release: app.root.get_screen('track').delete_storage(root)
+
+    Label:
+        id: label
+        font_size: 12
+
+    Label:
+        id: count_add
+        font_size: 12
+        text: '0'
+
+    Button:
+        text: '[b]-[/b]'
+        markup: True
+        size_hint_x: None
+        on_release: app.root.get_screen('track').subtract_num(root)
+
+    Button:
+        text: '[b]+[/b]'
+        markup: True
+        size_hint_x: None
+        on_release: app.root.get_screen('track').add_num(root)
+
+# <Tracker>:
+#     count_add: count_add
+#     size_hint_y: None
+#     height: 45
+#     padding: 4
+
+#     LeftButton:
+#         text: '[b]X[/b]'
+#         markup: True
+#         size_hint_x: None
+#         width: 60
+#         on_release: app.root.get_screen('track').delete_storage(root)
+
+#     LeftCenterLabel:
+#         id: label
+#         font_size: 20
+
+#     CenterLabel:
+#         id: count_add
+#         font_size: 20
+#         text: '0'
+
+#     CenterButton:
+#         text: '[b]-[/b]'
+#         markup: True
+#         size_hint_x: None
+#         width: 60
+#         on_release: app.root.get_screen('track').subtract_num(root)
+
+#     RightButton:
+#         text: '[b]+[/b]'
+#         markup: True
+#         size_hint_x: None
+#         width: 60
+#         on_release: app.root.get_screen('track').add_num(root)
