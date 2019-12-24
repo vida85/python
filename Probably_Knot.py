@@ -136,7 +136,7 @@ class Ui_MainWindow(object):
         wrd = self.wrd_line.text().lower()
         
         if txt != '':
-            API_KEY = 'a701e74e453ee6695e450310340401f5'
+            API_KEY = 'YOUR API KEY' <-- ## add your own API key here!!! ##
             URL = f'http://words.bighugelabs.com/api/2/{API_KEY}/{wrd}/json'
             
             # RELATIONSHIP_ABBR = {'syn':'Synonyms','ant':'Antonyms','rel':'Related terms',
