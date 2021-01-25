@@ -31,7 +31,14 @@ for filename in os.listdir():
         for ext in extensions:
             if filename.endswith(f'.{ext}'):
                 if os.path.isdir(f'{os.getcwd()}\\{folder}'):
-                    shutil.move(f'{os.getcwd()}\\{filename.title()}', f'{os.getcwd()}\\{folder}')
+                    try:
+                        shutil.move(f'{os.getcwd()}\\{filename.title()}', f'{os.getcwd()}\\{folder}')
+                    except shutil.Error:
+                        new_filename, ext = filename.split('.')
+                        new_filename = f'{new_filename.title()}_{round(time.time())}.{ext}'
+                        os.rename(filename, new_filename)
+                        
+                        shutil.move(f'{os.getcwd()}\\{new_filename}', f'{os.getcwd()}\\{folder}')
                 else:
                     os.mkdir(folder)
                     shutil.move(f'{os.getcwd()}\\{filename.title()}', f'{os.getcwd()}\\{folder}')
