@@ -2,6 +2,7 @@
 
 import shutil, os, time
 from pathlib import Path
+import time
 
 filechecker = {'00_Exe_Files': ['EXE'],
                '00_Python_Files': ['PY'],
